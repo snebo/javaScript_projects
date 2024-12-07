@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="./styles.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<!-- import mustash module   -->
+	</head>
+	<body>
+		<div class="tasks_container"></div>
+		<div id="task_module">
+			<h1>Tasks</h1>
+			<input id="input_box" type="text" placeholder="Add a task" />
+			<button id="add_task_btn">Add</button>
+			<ul id="tasks_list">
+				<script id="task_template" type="text/template">
+					{{#task}}
+					    <li><span>{{.}}</span><i class="del">X</i></li>
+					{{/task}}
+				</script>
+			</ul>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
+		<script src="./task_tracker_modular.js"></script>
+	</body>
+</html>
