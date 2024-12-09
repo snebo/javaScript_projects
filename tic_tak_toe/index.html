@@ -3,9 +3,52 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Tic Tac Toe</title>
+		<link rel="stylesheet" href="./tickStyles.css">
 	</head>
 	<body>
-		<script src="./tic_tac_toe.js"></script>
+		<!-- <button id="startBtn">Start Game</button> -->
+		<h1>Tic Tac Toe...</h1>
+		<div class="game_container">
+			<div class="section game_board_container">
+				<div class="game_board"></div>
+			</div>
+			<div class="section game_info_container">
+				<h2>Game Info</h2>
+				<p>
+					instructions Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					Iusto non ipsum earum voluptate odio provident nemo dolorem beatae
+					aperiam excepturi commodi, aliquid sit adipisci nihil a, alias quo
+					nostrum praesentium!
+				</p>
+				<div class="game_info">
+					<div class="player_info_container">
+						<h4>Player 1</h4>
+						<p>name</p>
+						<input type="text" id="player1" placeholder="playere 1 name" />
+						<p>token</p>
+						<input
+							type="text"
+							id="player1_token"
+							placeholder="symbol ie(X, O, $,...)"
+						/>
+					</div>
+					<div class="player_info_container">
+						<h4>Player 2</h4>
+						<p>name</p>
+						<input type="text" id="player2" placeholder="player name" />
+						<p>token</p>
+						<input
+							type="text"
+							id="player2_token"
+							placeholder="symbol ie(X, O, $,...)"
+						/>
+					</div>
+				</div>
+				<button id="startBtn">Start</button>
+			</div>
+		</div>
+
+		<script src="./tick.js"></script>
 	</body>
 </html>

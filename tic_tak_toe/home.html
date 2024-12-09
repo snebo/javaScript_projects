@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="tttstyles.css" />
+		<title>Document</title>
+	</head>
+	<body>
+		<main>
+			<h1>Tic Tac toe</h1>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae ipsum
+				voluptas beatae autem tempora sapiente officiis rerum praesentium.
+				Soluta harum consequuntur ad aperiam quo aliquam modi dolor beatae velit
+				laborum fugit illum quisquam impedit enim nam, perferendis fuga omnis
+				temporibus. Nam quasi numquam atque! Ea architecto harum a illum
+				ducimus!
+			</p>
+			<div
+				class="game_coontrollers"
+				style="
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					gap: 20px;
+				"
+			>
+				<div
+					class="information"
+					style="display: flex; justify-content: space-between; gap: 30px"
+				>
+					<h4>
+						Player1 <input id="pl1" type="text" placeholder="player1 name" />
+					</h4>
+					<h4>
+						Player2 <input id="pl2" type="text" placeholder="player2 name" />
+					</h4>
+				</div>
+				<button id="startBtn">Start Game</button>
+			</div>
+			<div class="board" style="margin: 30px 0">
+				<div class="game_board"></div>
+			</div>
+			<h3 class="score">
+				<span id="player1_score">3</span> : <span id="player2_score">1</span>
+			</h3>
+		</main>
+		<div class="connect_w_me"><p>X</p></div>
+		<script src="tick.js"></script>
+	</body>
+</html>
