@@ -6,19 +6,19 @@ class GameBoard {
 		this.COLS = 3;
 		this.board = []
 
-		for (i = 0; i < ROWS * COLS; i++) {
-			board[i] = new Cell();
+		for (let i = 0; i < this.ROWS * this.COLS; i++) {
+			this.board[i] = new Cell();
 		}
 	}
 
 	displayBoard(pl1, pl2) {
 		let table = "";
 		let cell = 0;
-		for (r = 0; r < ROWS; r++) {
-			table += `${board[cell].getValue()} | ${board[cell + 1].getValue()} | ${board[
+		for (let r = 0; r < this.ROWS; r++) {
+			table += `${this.board[cell].getValue()} | ${this.board[cell + 1].getValue()} | ${this.board[
 				cell + 2
 			].getValue()}\n`;
-			if (r !== ROWS - 1) {
+			if (r !== this.ROWS - 1) {
 				table += "---------\n";
 			}
 			cell += 3;
@@ -30,16 +30,16 @@ class GameBoard {
 
 	drawBoard() {
 		container.innerHTML = "";
-		for (i = 0; i < board.length; i++) {
+		for (let i = 0; i < this.board.length; i++) {
 			let cell = document.createElement("div");
 			cell.classList.add(`cell`);
 			cell.setAttribute("id", i);
-			content = document.createElement("p");
+			const content = document.createElement("p");
 			// content.textContent = board[i].getValue();
-			if (board[i].getValue() === "-") {
+			if (this.board[i].getValue() === "-") {
 				content.textContent = "";
 			} else {
-				content.textContent = board[i].getValue();
+				content.textContent = this.board[i].getValue();
 			}
 			cell.appendChild(content);
 			container.appendChild(cell);
@@ -48,7 +48,7 @@ class GameBoard {
 	};
 
 	resetBoard() {
-		board.forEach((cell) => {
+		this.board.forEach((cell) => {
 			cell.setValue("-");
 		});
 	};
@@ -62,7 +62,7 @@ class Cell {
 	setValue(token) {
 		this.value = token;
 	};
-	getValue() { return value };
+	getValue() { return this.value };
 }
 
 class Player {
@@ -105,8 +105,8 @@ class GameController {
 
 			console.log(this.board.displayBoard(this.Players[0], this.Players[1]));
 			this.board.drawBoard();
-			await checkRoundStatus(); // check for wins and tie
-			switchPlayerTurn();
+			await this.checkRoundStatus(); // check for wins and tie
+			this.switchPlayerTurn();
 
 		} else {
 			console.log("invalid move");
@@ -125,7 +125,7 @@ class GameController {
 			[0, 4, 8],
 			[2, 4, 6],
 		];
-		for (i = 0; i < winConditions.length; i++) {
+		for (let i = 0; i < winConditions.length; i++) {
 			if (
 				this.board.board[winConditions[i][0]].getValue() ===
 				this.board.board[winConditions[i][1]].getValue() &&
@@ -139,7 +139,7 @@ class GameController {
 		return false;
 	};
 	isFreeCells() {
-		EmptyCells = this.board.board.some((cell) => cell.getValue() === "-");
+		const EmptyCells = this.board.board.some((cell) => cell.getValue() === "-");
 		return EmptyCells;
 	};
 	displayScore() {
@@ -154,9 +154,9 @@ class GameController {
 	}
 	async checkRoundStatus() {
 		// check for a win
-		if (isroundWon()) {
+		if (this.isroundWon()) {
 			this.activePlayer.addToScore();
-			displayScore()
+			this.displayScore()
 			this.board.drawBoard()
 			//returns true if there is a win
 			this.isPlaying = false;
@@ -168,7 +168,7 @@ class GameController {
 
 			// display the score
 
-		} else if (!isFreeCells()) {
+		} else if (!this.isFreeCells()) {
 			this.isPlaying = false;
 			console.log("Tie game");
 			await new Promise((resolve) => setTimeout(resolve, 100));
