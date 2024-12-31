@@ -6,6 +6,7 @@ function Book(title, author, pages, genre, read) {
 	this.pages = pages;
 	this.genre = genre;
 	this.read = read;
+	this.activeBook;
 
 	//methods
 	this.markRead = function () {
@@ -40,7 +41,7 @@ class My_library {
 		this.books.forEach((currentBook, index) => {
 			if (currentBook.title === title) {
 				this.books.splice(index, 1);
-				displayAllBooks(this.books);
+				this.displayAllBooks(this.books);
 				console.log('Deleted book:', title);
 				bookDeleted = true; // Mark as deleted
 			}
@@ -50,7 +51,8 @@ class My_library {
 			console.log('Book not found');
 			return 'Book not found';
 		}
-
+		// close modal
+		document.querySelector('.modal-container').classList.remove('shown');
 		return 'Deleted';
 	}
 	displayAllBooks() {
@@ -66,6 +68,17 @@ class My_library {
         <p>by: ${book.author.toUpperCase()}</p>
         <p>${book.pages}pages</p>
         `;
+			bookcard.addEventListener('click', () => {
+				this.activeBook = book;
+				const modal = document.querySelector('.modal-container');
+				modal.classList.add('shown');
+				const modalTitle = document.querySelector('.modal h2');
+				const modalAuthor = document.querySelector('.modal p:nth-child(2)');
+				const modalGenre = document.querySelector('.modal p:nth-child(3)');
+				modalTitle.textContent = book.title;
+				modalAuthor.textContent = `by: ${book.author}`;
+				modalGenre.textContent = `Genre: ${book.genre}`;
+			});
 			shelf.appendChild(bookcard);
 		});
 	}
@@ -106,5 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		read.value = false;
 		my_library.addBookToLibrary(title, author, pages, genre, read);
 		my_library.displayAllBooks(my_library.books);
+	});
+
+	// close modal
+	document.querySelectorAll('.close-modal').forEach((button) => {
+		button.addEventListener('click', () => {
+			const modal = document.querySelector('.modal-container');
+			modal.classList.remove('shown');
+		});
+	});
+
+	// delete book
+	document.querySelector('.delete-book').addEventListener('click', () => {
+		const activeBook = my_library.activeBook;
+		my_library.removeBook(activeBook);
 	});
 });

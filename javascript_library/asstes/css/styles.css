@@ -82,3 +82,58 @@ input.tried:invalid {
 .bookcard > p {
 	font-size: 12px;
 }
+.modal {
+	width: 100%;
+	padding: 10px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+.content {
+	height: 450px;
+	overflow: scroll;
+	overflow-x: hidden;
+	scrollbar-width: thin;
+	background-color: #eee;
+	text-align: justify;
+	padding: 5px;
+	border: 1px solid grey;
+}
+.modal-container {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	width: 400px;
+	height: 600px;
+	border: 1px solid #aaa;
+	border-radius: 10px;
+	display: none;
+}
+.modal-container.shown {
+	display: block;
+}
+.closeX {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 28px;
+	font-size: 1.8em;
+	font-weight: 900;
+	position: absolute;
+	right: -15px;
+	top: -15px;
+	border: 1px solid #aaa;
+	border-radius: 50%;
+	background-color: white;
+	cursor: pointer;
+}
+.action {
+	margin-top: 5px;
+	padding: 10px 20px;
+}
+.modal-actions {
+	display: flex;
+	justify-content: space-around;
+}
