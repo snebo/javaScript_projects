@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drop-Down Component</title>
+    <style>
+      body {
+        display: flex;
+      }
+      /* style for dropdowm ========= */
+      li {
+        list-style-type: none;
+      }
+      .dropdown-btn,
+      .dropdown-item {
+        padding: 10px;
+        border: 1px solid;
+        width: 200px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .dropdown-menu {
+        overflow: hidden;
+        position: absolute; /* choose to overloap */
+        top: 100%;
+        display: none;
+      }
+      .dropdown-menu.show {
+        display: block;
+        transform-origin: top center;
+        animation: scaleOut 300ms ease-in-out forwards;
+      }
+      @keyframes scaleOut {
+        0% {
+          transform: scaleY(0);
+        }
+        50% {
+          transform: scaleY(0.5);
+        }
+        100% {
+          transform: scaleY(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dropdown-container" style="position: relative">
+      <div class="dropdown-btn">Click Me</div>
+      <ul class="dropdown-menu" style="padding: 0; margin: 0">
+        <li class="dropdown-item">Item 1</li>
+        <li class="dropdown-item">Item 2</li>
+        <li class="dropdown-item">Item 3</li>
+      </ul>
+    </div>
+
+    <hr />
+    <div class="dropdown-container-2" style="position: relative">
+      <div class="dropdown-btn">Try Me</div>
+      <ul class="dropdown-menu" style="padding: 0; margin: 0">
+        <li class="dropdown-item">choice 1</li>
+        <li class="dropdown-item">choice 2</li>
+        <li class="dropdown-item">choice 3</li>
+      </ul>
+    </div>
+
+    <script type="module">
+      import { Dropdown } from "./dropdown.js";
+      const dropdown = new Dropdown(document.querySelector(".dropdown-container"));
+      const dropdown2 = new Dropdown(document.querySelector(".dropdown-container-2"));
+    </script>
+  </body>
+</html>

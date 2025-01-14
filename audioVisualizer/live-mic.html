@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        background: #ffffff;
+        overflow: hidden;
+      }
+      #container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
+      #canvas1 {
+        border-radius: 8px;
+      }
+      #startButton {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background: #fff;
+      }
+      #startButton.recording {
+        background: #ff4444;
+        color: white;
+        border: none;
+      }
+    </style>
+    <title>auioDemo</title>
+  </head>
+  <body>
+    <div id="container">
+      <canvas id="canvas1"></canvas>
+      <button id="startButton">Start Microphone</button>
+    </div>
+    <script>
+      const container = document.getElementById("container");
+      const canvas = document.getElementById("canvas1");
+      const startButton = document.getElementById("startButton");
+
+      canvas.width = window.innerWidth * 0.8;
+      canvas.height = 200;
+
+      const ctx = canvas.getContext("2d");
+      let audioContext, analyser, microphone;
+      let isRecording = false;
+
+      async function startMicrophone() {
+        try {
+          if (!audioContext) {
+            audioContext = new AudioContext();
+          }
+
+          if (!isRecording) {
+            // Get microphone access
+            const stream = await navigator.mediaDevices.getUserMedia({
+              audio: {
+                echoCancellation: true,
+                noiseSuppression: true,
+                autoGainControl: true,
+              },
+            });
+
+            microphone = audioContext.createMediaStreamSource(stream);
+            analyser = audioContext.createAnalyser();
+
+            microphone.connect(analyser);
+            // Don't connect to destination to avoid feedback
+            // analyser.connect(audioContext.destination);
+
+            analyser.fftSize = 128;
+            startButton.textContent = "Stop Microphone";
+            startButton.classList.add("recording");
+            isRecording = true;
+            animate();
+          } else {
+            // Stop recording
+            microphone.mediaStream.getTracks().forEach((track) => track.stop());
+            microphone.disconnect();
+            analyser.disconnect();
+            startButton.textContent = "Start Microphone";
+            startButton.classList.remove("recording");
+            isRecording = false;
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          }
+        } catch (err) {
+          console.error("Error accessing microphone:", err);
+          alert(
+            "Error accessing microphone. Please ensure you have a microphone connected and have granted permission to use it."
+          );
+        }
+      }
+
+      startButton.addEventListener("click", startMicrophone);
+
+      const barWidth = 8;
+      const gap = 4;
+      const totalBarWidth = barWidth + gap;
+      const scale = 0.7;
+      const cornerRadius = 3;
+
+      function roundedRect(ctx, x, y, width, height, radius) {
+        if (height < radius * 2) {
+          radius = height / 2;
+        }
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + width - radius, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+        ctx.lineTo(x + width, y + height - radius);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        ctx.lineTo(x + radius, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      function animate() {
+        if (!isRecording) return;
+
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        analyser.getByteFrequencyData(dataArray);
+
+        const centerY = canvas.height / 2;
+        const centerX = canvas.width / 2;
+
+        // Draw from center outwards
+        for (let i = 0; i < bufferLength / 2; i++) {
+          // Left side (going outwards from center)
+          const leftX = centerX - (i + 1) * totalBarWidth;
+          const leftBarHeight = dataArray[i] * scale;
+
+          ctx.fillStyle = "pink";
+          // Upper bar
+          roundedRect(
+            ctx,
+            leftX,
+            centerY - leftBarHeight / 2,
+            barWidth,
+            leftBarHeight / 2,
+            cornerRadius
+          );
+          // Lower bar
+          roundedRect(ctx, leftX, centerY, barWidth, leftBarHeight / 2, cornerRadius);
+
+          // Right side (going outwards from center)
+          const rightX = centerX + i * totalBarWidth;
+          const rightBarHeight = dataArray[i] * scale;
+
+          // Upper bar
+          roundedRect(
+            ctx,
+            rightX,
+            centerY - rightBarHeight / 2,
+            barWidth,
+            rightBarHeight / 2,
+            cornerRadius
+          );
+          // Lower bar
+          roundedRect(ctx, rightX, centerY, barWidth, rightBarHeight / 2, cornerRadius);
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth * 0.8;
+      });
+    </script>
+  </body>
+</html>

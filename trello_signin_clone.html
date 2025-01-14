@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            overflow: hidden;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            color:#1e2b55
+        }
+        .name_logo>h3{
+            font-size: 2em;
+            font-weight: bolder;
+        }
+        hr{
+            margin: 0;
+            padding: 0;
+            border-top: .5px solid #ccc;
+        }
+        .name_logo{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            justify-content: center;
+            /* border: 1px solid; */
+        }
+        .sign_in_container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            /* border: 1px solid; */
+            padding: 30px 50px;
+            max-width: 320px;
+
+            justify-content: center;
+            align-items: center;
+
+            box-shadow: 1px 1px 10px #38383842;
+        }
+        .sign_in_container>p{
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sign_in_container>* {
+            /* border:1px solid; */
+            width: 90%;
+            text-align: center;
+        }
+        button{
+            color: white;
+            font-weight:500;
+            font-size: .9em;
+            background-color: rgb(37, 102, 223);
+            border:none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #0855b9;
+        }
+        input:hover{
+            background-color: #e4e4e4;
+        }
+        button,
+        input, .redirect_link {
+            height: 40px;
+        }
+        input{
+            border: 1px solid #acabab;
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+        input:placeholder-shown{
+            font-size: .9em;
+        }
+        .redirect_link{
+            border: 1px solid #acabab;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: row;
+            place-content: center;
+            align-items: center;
+            gap: 5px;
+
+            object-fit: contain;
+        }
+        .redirect_link:hover{
+            background-color: rgb(247, 247, 247);
+        }
+        .redirect_link>img, .name_logo>img{
+            width: 35px;
+            height: 35px;
+        }
+        .link_name{
+            font-weight: bolder;
+            font-size: 1.1em;
+            text-transform: capitalize;
+        }
+
+        .footer_text {
+            font-size: 0.8em;
+        }
+        .breaker, .name_logo, h3, p{
+            margin: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #2e80eb;
+        }
+        .atlassian{
+            width: 250px;
+            height: 40px;
+            object-fit: contain;
+            /* border: 1px solid; */
+        }
+        .footer>*{
+            padding: 0;
+            margin: 0;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sign_in_container">
+        <div class="name_logo">
+            <img src="#" alt="" class="">
+            <h3>Trello</h3>
+        </div>
+        <p>Log in to continue</p>
+        <form action="#">
+            <input class="placeholder" type="text" placeholder="Enter your email" />
+            <button type="submit">Continue</button>
+        </form>
+        <p class="breaker">Or continue with:</p>
+        <div class="redirect_link">
+            <img src="#" alt="">
+            <p class="link_name">Google</p>
+        </div>
+        <div class="redirect_link">
+            <img src="#" alt="">
+            <p class="link_name">Microsoft</p>
+        </div>
+        <div class="redirect_link">
+            <img src="#" alt="">
+            <p class="link_name">Apple</p>
+        </div>
+        <div class="redirect_link">
+            <img src="#" alt="">
+            <p class="link_name">slack</p>
+        </div>
+
+        <div class="links">
+            <p>
+                <a href="#">Can't log in?</a>
+                *
+                <a href="#"> Create an account</a>
+            </p>
+        </div>
+        <hr />
+        <div class="footer">
+            <img src="#" alt="" class="atlassian img">
+            <p class="footer_text">
+                One account for Trello, Jira, Confulence and <a href="#">more.</a>
+            </p>
+            <div class="footer_links">
+                <p class="footer_text">
+                    <a href="#">Privacy Policy</a>
+                    *
+                    <a href="#">User Notice</a>
+                </p>
+            </div>
+            <p class="footer_text">
+                This site isprotected by reCAPTCHA and the Google
+                <a href="p#">Privacy Policy</a> and
+                <a href="#"> Terms of service</a> apply.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
