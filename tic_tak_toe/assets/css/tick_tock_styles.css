@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Chewy&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Chewy", system-ui;
+  font-style: normal;
+}
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  text-transform: uppercase;
+  font-size: 3em;
+}
+p {
+  font-size: 1.2em;
+  font-family: "Architects Daughter", cursive;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+}
+h4 {
+  font-size: 1.5em;
+}
+input {
+  width: 130px;
+  font-size: 20px;
+  padding: 4px 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px dotted black;
+}
+main {
+  background-image: url("../images/paper_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 5px 3px #0000006b;
+  height: 95vh;
+  width: 100%;
+  max-width: 600px;
+  /* border: 1px solid; */
+  /* border-radius: 12px; */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 20px;
+}
+#startBtn {
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.game_board {
+  width: 300px;
+  height: 300px;
+  /* aspect-ratio: 1/1; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.cell {
+  border: 1px solid;
+  /* border-radius: 5px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+.cell > p {
+  font-size: 60px;
+}
+.cell:nth-child(-n + 3) {
+  border-top: none;
+}
+.cell:nth-child(3n) {
+  border-right: none;
+}
+.cell:nth-child(3n-2) {
+  border-left: none;
+}
+.cell:nth-child(n + 7) {
+  border-bottom: none;
+}
+.cell:hover {
+  background-color: aliceblue;
+}
+.score {
+  margin-top: auto;
+}
+.connect_w_me {
+  border: 1px solid;
+  width: 50px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.2s ease-in-out;
+}
+.connect_w_me:hover {
+  background-color: aliceblue;
+  transform: scale(1.1) translateY(-5px);
+}
+h3 {
+  font-size: 30px;
+}
