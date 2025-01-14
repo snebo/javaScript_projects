@@ -1,0 +1,1 @@
+export const capialize = word => word.trim().toUpperCase()
